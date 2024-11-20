@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "engine.h"
+#include <vector>
 
 int64_t currentTime() {
   struct timeval time;
@@ -33,7 +34,7 @@ int main(int argc, char **argv) {
     if (deltaTime >= 1) {
       deltaTime--;
       engine.tick();
-      std::cout << engine.get_tick() << std::endl;
+      //std::cout << engine.get_tick() << std::endl;
 	  }
     engine.update();
     

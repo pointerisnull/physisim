@@ -5,7 +5,7 @@ CXXFLAGS := -std=c++11 -Wall --static
 LIBS := -L/usr/local/lib /usr/local/lib/libSDL2.a -lm -lpthread -lrt
 INCLUDES := -I include
 
-SRCS := main.cpp engine.cpp display.cpp lib/glad/src/glad.c
+SRCS := main.cpp engine.cpp display.cpp pmath.c object.cpp lib/glad/src/glad.c
 OBJS := $(SRCS:.cpp=.o)
 EXEC := a.out
 
