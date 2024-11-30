@@ -18,3 +18,7 @@ void n2l() {
 void Particle::update() {
   a = {0, 0, 0};
 }
+
+Object::Object() {
+
+}
