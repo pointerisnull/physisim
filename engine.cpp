@@ -1,5 +1,9 @@
 #include "engine.h"
 #include "object.h"
+
+#include <stdint.h>
+#include <sys/time.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <math.h>
 
@@ -38,14 +42,12 @@ void Engine::init(char *title, int w, int h) {
   world = wld;
 }
 
-void Engine::timedelta(uint64_t current, uint64_t last) {
-  dtime = ((double)(current-last))/1000;
-  
-  printf("Time delta: %lf seconds\n", dtime);
+double Engine::timedelta() {
+  return dtime;
 }
 
 uint64_t Engine::get_tick() {
-    return ticks;
+  return ticks;
 }
 
 void Engine::set_tick(uint64_t t) {
@@ -53,5 +55,36 @@ void Engine::set_tick(uint64_t t) {
 }
 
 void Engine::tick() {
+  dtime--;
   ticks++;
+  sdelta = ((double)(current-last))/1000;
+}
+
+bool Engine::should_tick() {
+  if (dtime >= 1) 
+    return true;
+  return false;
+}
+
+uint64_t unixtime() {
+  struct timeval time;
+  gettimeofday(&time, NULL);
+  int64_t s1 = (int64_t)(time.tv_sec) * 1000;
+  int64_t s2 = (time.tv_usec / 1000);
+  return s1 + s2;
+}
+
+void Engine::update_time() {
+  last = current;
+  current = unixtime();
+  dtime += (current - last)/interval;
+}
+
+Engine::Engine(int rate) {
+  tps = rate;
+  interval = 1000/tps;
+  dtime = 0;
+  sdelta = 0;
+  last = unixtime();
+  current = last;
 }

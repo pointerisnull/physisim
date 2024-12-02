@@ -1,4 +1,3 @@
-
 #ifndef ENGINE_CLASS_H
 #define ENGINE_CLASS_H
 
@@ -10,22 +9,31 @@ class Engine {
   private:
     uint64_t ticks;
     uint64_t tick_last;
-    double dtime; //seconds
+    int tps;        //ticks per second
+    double interval;
+    double dtime;   //milliseconds
+    double sdelta;  //seconds
+    int64_t last;
+    int64_t current;
+
     Window window;
     World world;
 
   public:
-    uint8_t is_running;
-
     void init(char *title, int w, int h);
-    void tick();
-    void timedelta(uint64_t current, uint64_t last);
+    void update_time();
+    double timedelta();
+    bool should_tick();
     void set_tick(uint64_t t);
     uint64_t get_tick();
+    void tick();
     void update();
     void check_events();
-    
     void debug_print();
+
+    Engine(int tps);
+    
+    uint8_t is_running;
 };
 
 #endif
