@@ -65,41 +65,43 @@ void Window::drawmap() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
   SDL_RenderClear(renderer);
   for(int i = 0; i < width; i++) {
-     SDL_SetRenderDrawColor(renderer, 115, 115, 115, 0xFF);
+     SDL_SetRenderDrawColor(renderer, 55, 15, 15, 0xFF);
      SDL_RenderDrawLine(renderer, (i-cam.x)*cam.mapscale+width2, 0,  (i-cam.x)*cam.mapscale+width2, height);
   } 
   for(int i = 0; i < height; i++) {
-     SDL_SetRenderDrawColor(renderer, 115, 115, 115, 0xFF);
+     SDL_SetRenderDrawColor(renderer, 55, 15, 15, 0xFF);
      SDL_RenderDrawLine(renderer, 0, (i-cam.y)*cam.mapscale+height2, width, (i-cam.y)*cam.mapscale+height2);
   }
 
   SDL_SetRenderDrawColor(renderer, 15, 15, 15, 0xFF);
-  
+  /* 
   float x = cam.x, y = cam.y;
   adjustCoords2D(&x, &y);
   x = cam.mousex; y = cam.mousey;
   adjustCoords2D(&x, &y);
-  drawpixel(x, y, 255, 0, 255);
+  drawpixel(x, y, 255, 0, 255); //mouse position
+  */
 }
 
 void Window::clear() {
   drawmap();
 }
 
-void Window::draw(Object obj) {
-  switch (obj.type) {
-    case PARTICLE:
-      drawpixel(obj.pos.x, obj.pos.y, 0, 255, 255);
-      break;
-    case CIRCLE:
-      drawcircle(obj.pos.x, obj.pos.y, obj.radius, 255, 0, 0);
-      break;
-
+void Window::draw(World w) {
+  for (int i = 0; i < w.objc; i++) {
+    Object obj = w.copyobj(i);
+    switch (obj.type) {
+      case PARTICLE:
+        drawpixel(obj.pos.x, obj.pos.y, 0, 255, 255);
+        break;
+      case CIRCLE:
+        drawcircle(obj.pos.x, obj.pos.y, obj.radius, 255, 0, 0);
+        break;
     case BOX:
-
       break;
     default:
-     break;
+      break;
+    }
   }
 }
 
@@ -164,7 +166,7 @@ Window::Window(char *title, int w, int h) {
 
   cam.x = 50;
   cam.y = 50;
-  cam.mapscale = 12;
+  cam.mapscale = 8;
 }
 
 Window::Window() {}

@@ -2,7 +2,7 @@
 #define DISPLAY_H
 
 #include <SDL2/SDL.h>
-#include "object.h"
+#include "world.h"
 
 typedef struct {
 	float x,y,z;
@@ -30,7 +30,7 @@ class Window {
 
   public:
     void clear();
-    void draw(Object obj);
+    void draw(World w);
     void update();
     void check_updates();
     void kill();

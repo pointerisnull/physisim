@@ -1,5 +1,6 @@
 #include "engine.h"
 #include "object.h"
+#include "world.h"
 
 #include <stdint.h>
 #include <sys/time.h>
@@ -8,13 +9,19 @@
 #include <math.h>
 
 void Engine::update() {
-  Object p({50*cos((float)ticks*0.02)+256, 256.0 - 50*sin((float)ticks*0.02), 0}, 1, 1, false);
-  Object c({0.08 + (float)ticks*0.2, 50-sin((float)ticks*0.01)*20, 0}, 20, 1, 1, false);
+  Object p1({ (float)(50*cos((float)ticks*0.02)+256), (float)(256.0 - 50*sin((float)ticks*0.02)), 0}, 1, 1, false);
+  Object p2({ (float)(50*cos((float)ticks*0.09)+400), (float)(150.0 - 50*sin((float)ticks*0.2)), 0}, 1, 1, false);
+  Object c1({ (float)(0.08 + (float)ticks*0.2), (float)(50-sin((float)ticks*0.01)*20), 0}, 20, 1, 1, false);
+  Object c2({ (float)(50*cos((float)ticks*0.08)+300), (float)(300.0 - 50*sin((float)ticks*0.02) - ticks*0.1), 0}, 20, 1, 1, false);
 
+  world.addobj(p1);
+  world.addobj(p2);
+  world.addobj(c1);
+  world.addobj(c2);
+  
   if (window.running) {
     window.clear();
-    window.draw(p);
-    window.draw(c);
+    window.draw(world);
     window.update();
   }
   if (ticks != tick_last) {

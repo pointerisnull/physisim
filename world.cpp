@@ -2,6 +2,7 @@
 
 void World::addobj(Object obj) {
   objects.push_back(obj);
+  objc++;
 }
 
 Object *World::getobj(int id) {
@@ -14,6 +15,7 @@ Object World::copyobj(int id) {
 
 World::World(int t) {
   type = t;
+  objc = 0;
   switch (type) {
     case SPACE:
       gravity = 0;
@@ -32,4 +34,6 @@ World::World(int t) {
   }
 }
 
-World::World() {}
+World::World() {
+  objc = 0;
+}
