@@ -22,6 +22,45 @@ void Window::drawpixel(float x,float y, int r, int g, int b) {
   SDL_RenderFillRect(renderer, &pixel);
 }
 
+void Window::drawcircle(float centreX, float centreY, float radius, int r, int g, int b) {
+  SDL_SetRenderDrawColor(renderer, r,g,b,255);
+  const float diameter = (radius * 2);
+
+  float x = (radius - 1);
+  float y = 0;
+  float tx = 1;
+  float ty = 1;
+  float error = (tx - diameter);
+
+  while (x >= y)
+  {
+  // Each of the following renders an octant of the circle
+  SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
+  SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
+  SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
+  SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
+  SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
+  SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
+  SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
+  SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+
+    if (error <= 0)
+    {
+    	++y;
+    	error += ty;
+    	ty += 2;
+    }
+
+    if (error > 0)
+    {
+    	--x;
+    	tx += 2;
+    	error += (tx - diameter);
+    }
+
+  }
+}
+
 void Window::drawmap() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
   SDL_RenderClear(renderer);
@@ -43,8 +82,28 @@ void Window::drawmap() {
   drawpixel(x, y, 255, 0, 255);
 }
 
-void Window::draw() {
+void Window::clear() {
   drawmap();
+}
+
+void Window::draw(Object obj) {
+  switch (obj.type) {
+    case PARTICLE:
+      drawpixel(obj.pos.x, obj.pos.y, 0, 255, 255);
+      break;
+    case CIRCLE:
+      drawcircle(obj.pos.x, obj.pos.y, obj.radius, 255, 0, 0);
+      break;
+
+    case BOX:
+
+      break;
+    default:
+     break;
+  }
+}
+
+void Window::update() {
   SDL_RenderPresent(renderer);
 }
 
@@ -69,7 +128,13 @@ void Window::check_updates() {
   }
 }
 
-void Window::create(char *title, int w, int h) {
+void Window::kill() {
+  running = 0;
+  SDL_DestroyWindow(win);
+  SDL_Quit();
+}
+
+Window::Window(char *title, int w, int h) {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     printf("SDL failed to initialize!\n%s\n", SDL_GetError());
     running = 0;
@@ -102,8 +167,4 @@ void Window::create(char *title, int w, int h) {
   cam.mapscale = 12;
 }
 
-void Window::kill() {
-  running = 0;
-  SDL_DestroyWindow(win);
-  SDL_Quit();
-}
+Window::Window() {}

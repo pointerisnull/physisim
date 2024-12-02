@@ -4,7 +4,8 @@
 #include <stdint.h>
 
 #include "engine.h"
-#include <vector>
+#include "object.h"
+#include "pmath.h"
 
 int64_t currentTime() {
   struct timeval time;
@@ -28,18 +29,21 @@ int main(int argc, char **argv) {
 	while (engine.is_running) { 
     current = currentTime();
     deltaTime += (current - last)/interval;
-    last = current;
-    //scanInput(&world, &p);
+    
     engine.check_events();
+    
     if (deltaTime >= 1) {
       deltaTime--;
       engine.tick();
-      //std::cout << engine.get_tick() << std::endl;
-	  }
-    engine.update();
+      engine.timedelta(current, last);
+	  
+    }
     
+    engine.update();
+    last = current;
+    /*
     if (engine.get_tick() > 1000)
-      engine.is_running = 0;
+      engine.is_running = 0;*/
 	}
 
 	return 0;

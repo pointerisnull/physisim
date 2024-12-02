@@ -4,20 +4,24 @@
 
 #include <stdint.h>
 #include "display.h"
+#include "world.h"
 
 class Engine {
   private:
     uint64_t ticks;
     uint64_t tick_last;
-    Window win;
+    double dtime; //seconds
+    Window window;
+    World world;
 
   public:
     uint8_t is_running;
 
     void init(char *title, int w, int h);
     void tick();
+    void timedelta(uint64_t current, uint64_t last);
+    void set_tick(uint64_t t);
     uint64_t get_tick();
-    void set_tick(uint64_t setter);
     void update();
     void check_events();
     

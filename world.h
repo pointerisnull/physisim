@@ -2,15 +2,35 @@
 #define WORLD_H
 
 #include "pmath.h"
+#include "object.h"
+#include <vector>
+#define SPACE   0
+#define FLAT    1 
+#define PLANET  2
 
 class World {
+  private:
+    float gravity;
+    bool drag;
+    std::vector<Object> objects;
+
   public:
-    float minsize     = 0.001f;
-    float maxsize     = 1028.0f;
-    float mindensity  = 0.2f; 
-    float maxdensity  = 32.0f; 
-       
+    int type;
+    int objc;
     
+    void addobj(Object obj);
+    Object *getobj(int id);
+    Object copyobj(int id);
+    
+    World();
+    World(int type); 
 };
+
+/*
+  float minsize     = 0.001f;
+  float maxsize     = 1028.0f;
+  float mindensity  = 0.2f; 
+  float maxdensity  = 32.0f; 
+ */
 
 #endif
