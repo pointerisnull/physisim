@@ -1,5 +1,8 @@
 #include <math.h>
+#include <float.h>
 #include "pmath.h"
+
+#define EPSILON FLT_EPSILON 
 
 float magnitude(Vec a) {
   return sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
@@ -20,6 +23,40 @@ float angle(Vec a, Vec b) {
 
 float dot(Vec a, Vec b) {
   return a.x*b.x + a.y*b.y + a.z*b.z;
+}
+
+int compare(Vec a, Vec b) {
+  if ( 
+     (fabs(a.x - b.x) < EPSILON) &&
+     (fabs(a.y - b.y) < EPSILON) &&
+     (fabs(a.z - b.z) < EPSILON)
+     )
+    return 1;
+  return 0;
+}
+
+Vec sum(Vec a, Vec b) {
+  return {
+    (a.x + b.x), 
+    (a.y + b.y), 
+    (a.z + b.z) 
+  }; 
+}
+
+Vec sub(Vec a, Vec b) {
+  return {
+    (a.x - b.x), 
+    (a.y - b.y), 
+    (a.z - b.z) 
+  }; 
+}
+
+Vec scale(Vec a, float s) {
+  return {
+    (a.x*s), 
+    (a.y*s), 
+    (a.z*s) 
+  }; 
 }
 
 Vec cross(Vec a, Vec b) {

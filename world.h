@@ -21,7 +21,8 @@ class World {
     void addobj(Object obj);
     Object *getobj(int id);
     Object copyobj(int id);
-    
+    void step(float dtime);
+
     World();
     World(int type); 
 };

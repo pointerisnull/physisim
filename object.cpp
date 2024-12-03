@@ -2,17 +2,40 @@
 #include <math.h>
 #include <stdio.h>
 
-Object::Object() {};
+void Object::step(float dtime) {
+  if (!equalibrium) {
+    Vec acceleration = { // newton's second law
+      fnet.x/mass, fnet.y/mass, fnet.z/mass
+    };
+    velocity = sum(velocity, acceleration); //velocity += acceleration;
+    
+    printf("velocity = %f m/s\n\n", magnitude(velocity));
+    
+    fnet = ZERO;
+    equalibrium = true;
+  }
+  pos = sum(pos, scale(velocity, dtime)); //pos += velocity * deltaTime;
+}
+
+void Object::applyforce(Vec force) {
+  fnet.x += force.x; 
+  fnet.y += force.y; 
+  fnet.z += force.z; 
+
+  equalibrium = false;
+}
 
 Object::Object(Vec pos, float density, float mass, float restitution, float area, bool is_static, float radius, float width, float height, int type) {
   pos = pos;
   velocity = {0, 0, 0};
+  fnet = {0, 0, 0};
   angle = 0;
   vrot = 0;
 
   mass = mass;
   density = density;
   elasticity = restitution;
+  equalibrium = true;
   is_static = is_static;
 
   width = width;
@@ -27,12 +50,14 @@ Object::Object(Vec pos, float density, float mass, float restitution, float area
 Object::Object(Vec p, float m, float d, float is_s) {
   pos = p;
   velocity = {0, 0, 0};
+  fnet = {0, 0, 0};
   angle = 0;
   vrot = 0;
 
   mass = m;
   density = d;
   elasticity = 0;
+  equalibrium = true;
   is_static = is_s;
 
   width = 0;
@@ -46,12 +71,14 @@ Object::Object(Vec p, float m, float d, float is_s) {
 Object::Object(Vec p, float r, float m, float d, float is_s) {
   pos = p;
   velocity = {0, 0, 0};
+  fnet = {0, 0, 0};
   angle = 0;
   vrot = 0;
 
   mass = m;
   density = d;
   elasticity = 0;
+  equalibrium = true;
   is_static = is_s;
 
   width = 0;
@@ -65,6 +92,7 @@ Object::Object(Vec p, float r, float m, float d, float is_s) {
 Object::Object(Vec p, float w, float h, float m, float d, float is_s) {
   pos = p;
   velocity = {0, 0, 0};
+  fnet = {0, 0, 0};
   angle = 0;
   vrot = 0;
 
@@ -80,3 +108,5 @@ Object::Object(Vec p, float w, float h, float m, float d, float is_s) {
     
   type = BOX;
 }
+
+Object::Object() {};

@@ -2,6 +2,7 @@
 #define OBJ_H
 
 #include "pmath.h"
+#include <vector>
 
 #define PARTICLE  0
 #define CIRCLE    1
@@ -10,6 +11,7 @@
 class Object {
   private:
     Vec velocity;
+    Vec fnet;
     float angle;
     float vrot;
 
@@ -18,6 +20,7 @@ class Object {
     float mass;
     float density;
     float elasticity;
+    bool equalibrium;
     bool is_static;
 
     float width;
@@ -26,6 +29,9 @@ class Object {
     float radius;
     
     int type;
+
+    void applyforce(Vec force);
+    void step(float dtime);
     
     Object();
     Object(Vec pos, float density, float mass, float restitution, float area, bool is_static, float radius, float width, float height, int type); //GENERIC

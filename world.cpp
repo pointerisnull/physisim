@@ -1,5 +1,14 @@
 #include "world.h"
 
+void World::step(float dtime) {
+  for (int i = 0; i < objc; i++) {
+    for (int j = 0; j < objc; j++) {
+      
+    }
+    getobj(i)->step(dtime);
+  }
+}
+
 void World::addobj(Object obj) {
   objects.push_back(obj);
   objc++;
