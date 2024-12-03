@@ -47,9 +47,19 @@ void Interpreter::run_code() {
   int count = 0;
   char **lines = split(buffer, DELIMITERS, &count);
   codes = encode(lines, &count, &dict);
+    
+  printf("%s\n", buffer);
+  debug_print(lines, count);
+
+  printf("Codes: ");
+  for (int i = 0; i < count; i++) {
+    printf("%d ", codes[i]);
+  }
+  printf("\n");
   
   free(codes);
   free_split_string(lines, count);
+
 }
 
 Interpreter::Interpreter() {

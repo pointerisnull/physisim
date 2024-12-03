@@ -38,12 +38,14 @@ void Engine::init(char *title, int w, int h) {
   window = win;
   world = wld;
   
-  /*Object p1({ (float)(50*cos((float)ticks*0.02)+256), (float)(256.0 - 50*sin((float)ticks*0.02)), 0}, 0.01, 1, false);
-  Object p2({ (float)(50*cos((float)ticks*0.09)+400), (float)(150.0 - 50*sin((float)ticks*0.2)), 0}, 0.01, 1, false);*/
+  Object p1({ (float)(50*cos((float)ticks*0.02)+256), (float)(256.0 - 50*sin((float)ticks*0.02)), 0}, 0.01, 1, false);
+  Object p2({ (float)(50*cos((float)ticks*0.09)+400), (float)(150.0 - 50*sin((float)ticks*0.2)), 0}, 0.01, 1, false);
   Object c1({ (float)(0.08 + (float)ticks*0.2), (float)(50-sin((float)ticks*0.01)*20), 0}, 20, 0.01, 1, false);
   Object c2({ (float)(50*cos((float)ticks*0.08)+300), (float)(300.0 - 50*sin((float)ticks*0.02) - ticks*0.1), 0}, 20, 0.01, 1, false);
   Object c3({400,400, 0}, 20, 0.01, 1, false);
 
+  world.addobj(p1);
+  world.addobj(p2);
   world.addobj(c1);
   world.addobj(c2);
   world.addobj(c3);
