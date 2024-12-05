@@ -17,7 +17,7 @@
 #define LITERAL_T     4
 #define VALUE_T       5
 #define DTYPE_T       6
-
+/*
 static const char *SYM_NEWLINE = "\n";
 
 //static const char *SYM_NEWLINE = "\n"
@@ -66,6 +66,6 @@ static const char *KEYWORD_i8      = "BIT8";
 static const char *KEYWORD_i16     = "BIT16";
 static const char *KEYWORD_i32     = "BIT32";
 static const char *KEYWORD_i64     = "BIT64";
-
+*/
 
 #endif

@@ -15,6 +15,7 @@ typedef struct {
 class Window {
   private:
     void drawpixel(float x,float y, int r, int g, int b);
+    void drawbox(float x,float y, float w, float h, int r, int g, int b);
     void drawcircle(float centreX, float centreY, float radius, int r, int g, int b);
     void drawline (int x, int y1, int y2, int r, int g, int b);
     void adjustCoords2D(float *x, float *y);

@@ -9,7 +9,7 @@ void Object::step(float dtime) {
     };
     velocity = sum(velocity, acceleration); //velocity += acceleration;
     
-    printf("velocity = %f m/s\n\n", magnitude(velocity));
+    //printf("velocity = %f m/s\n\n", magnitude(velocity));
     
     fnet = ZERO;
     equalibrium = true;
@@ -21,8 +21,24 @@ void Object::applyforce(Vec force) {
   fnet.x += force.x; 
   fnet.y += force.y; 
   fnet.z += force.z; 
-
+  
   equalibrium = false;
+}
+
+void Object::move(Vec v) {
+  pos = sum(pos, v);
+}
+
+void Object::moveto(Vec p) {
+  pos = p;
+}
+
+Vec Object::getpos() {
+  return pos;
+}
+
+float Object::getradius() {
+  return radius;
 }
 
 Object::Object(Vec pos, float density, float mass, float restitution, float area, bool is_static, float radius, float width, float height, int type) {
@@ -56,7 +72,7 @@ Object::Object(Vec p, float m, float d, float is_s) {
 
   mass = m;
   density = d;
-  elasticity = 0;
+  elasticity = 0.2;
   equalibrium = true;
   is_static = is_s;
 
@@ -68,7 +84,7 @@ Object::Object(Vec p, float m, float d, float is_s) {
   type = PARTICLE;
 }
 //circle
-Object::Object(Vec p, float r, float m, float d, float is_s) {
+Object::Object(Vec p, float r, float m, float d, float e, float is_s) {
   pos = p;
   velocity = {0, 0, 0};
   fnet = {0, 0, 0};
@@ -77,7 +93,7 @@ Object::Object(Vec p, float r, float m, float d, float is_s) {
 
   mass = m;
   density = d;
-  elasticity = 0;
+  elasticity = e;
   equalibrium = true;
   is_static = is_s;
 
@@ -89,7 +105,7 @@ Object::Object(Vec p, float r, float m, float d, float is_s) {
   type = CIRCLE;
 }
 //rectangle
-Object::Object(Vec p, float w, float h, float m, float d, float is_s) {
+Object::Object(Vec p, float w, float h, float m, float d, float e, float is_s) {
   pos = p;
   velocity = {0, 0, 0};
   fnet = {0, 0, 0};
@@ -98,7 +114,7 @@ Object::Object(Vec p, float w, float h, float m, float d, float is_s) {
 
   mass = m;
   density = d;
-  elasticity = 0;
+  elasticity = e;
   is_static = is_s;
 
   width = w;

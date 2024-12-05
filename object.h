@@ -10,13 +10,13 @@
 
 class Object {
   private:
-    Vec velocity;
     Vec fnet;
     float angle;
     float vrot;
 
   public:
     Vec pos;
+    Vec velocity;
     float mass;
     float density;
     float elasticity;
@@ -32,12 +32,17 @@ class Object {
 
     void applyforce(Vec force);
     void step(float dtime);
+    void move(Vec v);
+    void moveto(Vec p);
+
+    Vec getpos();
+    float getradius();
     
     Object();
     Object(Vec pos, float density, float mass, float restitution, float area, bool is_static, float radius, float width, float height, int type); //GENERIC
     Object(Vec pos, float mass, float density, float is_static); //PARTICLE
-    Object(Vec pos, float radius, float mass, float density, float is_static); //CIRCLE
-    Object(Vec pos, float width, float height, float mass, float density, float is_static); //BOX
+    Object(Vec pos, float radius, float mass, float density, float elasticity, float is_static); //CIRCLE
+    Object(Vec pos, float width, float height, float mass, float density, float elasticity, float is_static); //BOX
     
 };
 /*

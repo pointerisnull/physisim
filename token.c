@@ -96,7 +96,7 @@ int is_symbol(char *str) {
 }
 
 int is_lit(char *str) {
-  if (str[0] == SYM_STRLIT[0])
+  if (str[0] == '\"')//SYM_STRLIT[0])
     return 1;
   return 0;
 }

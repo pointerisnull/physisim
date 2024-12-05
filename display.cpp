@@ -16,11 +16,22 @@ void Window::drawpixel(float x,float y, int r, int g, int b) {
   SDL_Rect pixel;
   pixel.x = x;
   pixel.y = y;
-  pixel.w = cam.mapscale;
-  pixel.h = cam.mapscale;
+  pixel.w = cam.mapscale/2;
+  pixel.h = cam.mapscale/2;
   SDL_SetRenderDrawColor(renderer, r,g,b,255);
   SDL_RenderFillRect(renderer, &pixel);
 }
+
+void Window::drawbox(float x,float y, float w, float h, int r, int g, int b) { 
+  SDL_Rect pixel;
+  pixel.x = x;
+  pixel.y = y;
+  pixel.w = cam.mapscale*w;
+  pixel.h = cam.mapscale*h;
+  SDL_SetRenderDrawColor(renderer, r,g,b,255);
+  SDL_RenderDrawRect(renderer, &pixel);
+}
+
 
 void Window::drawcircle(float centreX, float centreY, float radius, int r, int g, int b) {
   SDL_SetRenderDrawColor(renderer, r,g,b,255);
@@ -98,6 +109,7 @@ void Window::draw(World w) {
         drawcircle(obj.pos.x, obj.pos.y, obj.radius, 255, 0, 0);
         break;
     case BOX:
+        drawbox(obj.pos.x, obj.pos.y, obj.width, obj.height, 0, 255, 0);
       break;
     default:
       break;

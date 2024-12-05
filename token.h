@@ -5,6 +5,7 @@
 #include "table.h"
 
 static const char *SYMBOLS[SYMBOL_COUNT] = {
+  /*
   SYM_NEWLINE,
   SYM_COMMA,  
   SYM_PLUS,   
@@ -31,10 +32,11 @@ static const char *SYMBOLS[SYMBOL_COUNT] = {
   SYM_PP,    
   SYM_MM,
   SYM_PEQUALS,
-  SYM_MEQUALS
+  SYM_MEQUALS*/
 };
 
 static const char *KEYWORDS[KEYWORD_COUNT] = {
+  /*
   KEYWORD_NULL, 
   KEYWORD_VOID,
   KEYWORD_BEGIN,
@@ -53,6 +55,7 @@ static const char *KEYWORDS[KEYWORD_COUNT] = {
   KEYWORD_i16,  
   KEYWORD_i32,
   KEYWORD_i64
+  */
 };
 
 int *encode(char **buffer, int *tokc, dictionary_t *dict);

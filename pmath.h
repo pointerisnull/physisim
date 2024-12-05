@@ -11,6 +11,7 @@ float magnitude(Vec a);
 float distance(Vec a, Vec b);
 float angle(Vec a, Vec b);
 float dot(Vec a, Vec b);
+float min(float a, float b);
 int compare(Vec a, Vec b);
 Vec sum(Vec a, Vec b);
 Vec sub(Vec a, Vec b);

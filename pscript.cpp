@@ -47,7 +47,7 @@ void Interpreter::run_code() {
   int count = 0;
   char **lines = split(buffer, DELIMITERS, &count);
   codes = encode(lines, &count, &dict);
-    
+
   printf("%s\n", buffer);
   debug_print(lines, count);
 

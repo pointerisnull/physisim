@@ -22,6 +22,7 @@ class World {
     Object *getobj(int id);
     Object copyobj(int id);
     void step(float dtime);
+    void handle_collisions();
 
     World();
     World(int type); 

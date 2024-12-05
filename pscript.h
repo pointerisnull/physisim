@@ -6,7 +6,6 @@
 #include "token.h"
 #include "table.h"
 #include "cono.h"
-#include "interp.h"
 
 
 class Interpreter {

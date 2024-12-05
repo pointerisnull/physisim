@@ -25,6 +25,10 @@ float dot(Vec a, Vec b) {
   return a.x*b.x + a.y*b.y + a.z*b.z;
 }
 
+float min(float a, float b) {
+  return (a <= b) ? a : b;
+}
+
 int compare(Vec a, Vec b) {
   if ( 
      (fabs(a.x - b.x) < EPSILON) &&
