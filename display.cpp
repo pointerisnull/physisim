@@ -85,13 +85,7 @@ void Window::drawmap() {
   }
 
   SDL_SetRenderDrawColor(renderer, 15, 15, 15, 0xFF);
-  /* 
-  float x = cam.x, y = cam.y;
-  adjustCoords2D(&x, &y);
-  x = cam.mousex; y = cam.mousey;
-  adjustCoords2D(&x, &y);
-  drawpixel(x, y, 255, 0, 255); //mouse position
-  */
+
 }
 
 void Window::clear() {

@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "lexer.h"
 /*utility function*/
 int is_delim(char ch, const char *delimiters);
 /*given a file buffer, return an array of strings that corrispond with each word*/
@@ -11,13 +12,12 @@ char **split(const char *str, const char *delimiters, int *count) {
     perror("Failed to allocate memory");
     exit(EXIT_FAILURE);
   }
-
   int i = 0, j = 0;
   const char *start = str;
   int ignore_delim = 0; //tag for string literals
 
   while (*str) {
-    
+
     int delim_res = is_delim(*str, delimiters);
     //regular delimiter case
     if (delim_res == 1 && ignore_delim == 0) {
@@ -81,7 +81,7 @@ char **split(const char *str, const char *delimiters, int *count) {
 }
 /*determines if a character is a delimiter or not*/
 int is_delim(char ch, const char *delimiters) {
-  if(ch == '"' || ch == '#') //case for string literals
+  if(ch == '(' || ch == ')') //case for string literals
     return -1;
   while (*delimiters) {
     if (ch == *delimiters) {
@@ -112,7 +112,10 @@ void debug_print(char **buffer, int count) {
     else if (strcmp(buffer[i], " ") == 0)
       printf("_`");
     else
-      printf("%s`", buffer[i]);
+      if (atof(buffer[i]) > 0.0)
+        printf("%f`", atof(buffer[i]));
+      else 
+        printf("%s`", buffer[i]);
   }
   printf("EOF`\n");
 }

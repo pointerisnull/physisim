@@ -29,7 +29,13 @@ float min(float a, float b) {
   return (a <= b) ? a : b;
 }
 
-int compare(Vec a, Vec b) {
+int fcomp(float a, float b) {
+  if (fabs(a-b) < EPSILON)
+    return 1;
+  return 0;
+}
+
+int vcomp(Vec a, Vec b) {
   if ( 
      (fabs(a.x - b.x) < EPSILON) &&
      (fabs(a.y - b.y) < EPSILON) &&

@@ -12,7 +12,6 @@ void World::handle_collisions() {
   Collision coll;
   for (int i = 0; i < objc-1; i++) {
     for (int j = i+1; j < objc; j++) {
-      //printf("a:%f, b:%f\n", getobj(i)->pos.x, getobj(j)->pos.x);
       coll.handle(getobj(i), getobj(j));
     }
   }

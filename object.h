@@ -10,11 +10,11 @@
 
 class Object {
   private:
-    Vec fnet;
     float angle;
     float vrot;
 
   public:
+    Vec fnet;
     Vec pos;
     Vec velocity;
     float mass;
@@ -36,7 +36,16 @@ class Object {
     void moveto(Vec p);
 
     Vec getpos();
+    float getmass();
+    void setmass(float m);
     float getradius();
+    void setradius(float r);
+    void setwidth(float w);
+    void setheight(float h);
+    void setvel(Vec v);
+    void setpos(Vec p);
+    void setdens(float d);
+    void setelas(float e);
     
     Object();
     Object(Vec pos, float density, float mass, float restitution, float area, bool is_static, float radius, float width, float height, int type); //GENERIC

@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "display.h"
 #include "world.h"
+#include "pscript.h"
 
 class Engine {
   private:
@@ -15,9 +16,11 @@ class Engine {
     double sdelta;  //seconds
     int64_t last;
     int64_t current;
+    int evc;
 
     Window window;
     World world;
+    Interpreter interp;
 
   public:
     void init(char *title, int w, int h);
@@ -29,6 +32,7 @@ class Engine {
     void tick();
     void update();
     void check_events();
+    void shutdown();
     void debug_print();
 
     Engine(int tps);

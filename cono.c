@@ -8,44 +8,29 @@
 /*KEYWORDS -> THEN SYMBOLS*/
 char *getop_str(int **ctable, int co, int no) {
   int code = ctable[co][no];
-  /*switch(code) {
+  switch(code) {
     case ERR:
       return (char*)"ERR";
       break;
     case NOOP:
       return (char*)"NOOP";
       break;
-    case NEWLN:
-      return (char*)"NEWLN";
+    case INIT:
+      return (char*)"INIT";
       break;
-    case STARTDEF:
-      return (char*)"STARTDEF";
+    case EVENT:
+      return (char*)"EVENTS";
       break;
-    case ENDDEF:
-      return (char*)"ENDDEF";
+    case APPLY:
+      return (char*)"APPLY";
       break;
-    case INPUT:
-      return (char*)"INPUT";
-      break;
-    case PRINT:
-      return (char*)"PRINT";
-      break;
-    case FUNCDEF:
-      return (char*)"FUNCDEF";
+    case DEFINE:
+      return (char*)"DEFINE";
       break;
     case PARAM:
       return (char*)"PARAM";
       break;
-    case ENDPAREN:
-      return (char*)"ENDPAREN";
-      break;
-    case STARTPROG:
-      return (char*)"STARTPROG";
-      break;
-    case RETURN:
-      return (char*)"RETURN";
-      break;
-  }*/
+   };
   return (char*)"ERR";
 }
 /********************************
@@ -61,25 +46,26 @@ char *getop_str(int **ctable, int co, int no) {
 ********************************/
 void cono_combo(int **ctable, dictionary_t *dict) {
   int size = dict->keywordmax + dict->symbolmax;
-  /*
   for (int i = 0; i < size; i++) {
-    ctable[dict_push(dict, SYMBOL_T, (char *) SYM_NEWLINE)][i] = NOOP; 
-    ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_RETURN)][i] = RETURN; 
-    ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_PRINT)][i] = PRINT; 
+    ctable[dict_push(dict, SYMBOL_T, (char *) SYM_NL)][i] = NOOP;
+
   }
-  ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)][dict_push(dict, SYMBOL_T, (char *) SYM_EQUALS)] = STARTDEF; 
-  ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)][dict_push(dict, SYMBOL_T, (char *) SYM_NEWLINE)] = STARTDEF; 
-  ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)][dict_push(dict, SYMBOL_T, (char *) SYM_COMMA)] = STARTDEF; 
-  ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)][dict_push(dict, SYMBOL_T, (char *) SYM_RPAREN)] = STARTDEF; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_EQUALS)][dict_push(dict, SYMBOL_T, (char *) SYM_NEWLINE)] = ENDDEF; 
-  ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)][dict_push(dict, SYMBOL_T, (char *) SYM_LPAREN)] = FUNCDEF; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_LPAREN)][dict_push(dict, SYMBOL_T, (char *) SYM_COMMA)] = PARAM; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_LPAREN)][dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)] = PARAM; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_COMMA)][dict_push(dict, KEYWORD_T, (char *) KEYWORD_i8)] = PARAM; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_COMMA)][dict_push(dict, SYMBOL_T, (char *) SYM_RPAREN)] = PARAM; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_LPAREN)][dict_push(dict, SYMBOL_T, (char *) SYM_RPAREN)] = PARAM; 
-  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_RPAREN)][dict_push(dict, SYMBOL_T, (char *) SYM_NEWLINE)] = ENDPAREN; 
-  ctable[dict_push(dict, KEYWORD_T, (char *) KEYWORD_BEGIN)][dict_push(dict, SYMBOL_T, (char *) SYM_NEWLINE)] = STARTPROG; */
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_INIT       )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = INIT;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_EVENT      )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = EVENT;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_APPLY      )][dict_push(dict, SYMBOL_T, (char *) SYM_AT  )] = APPLY;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_PTCL       )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = DEFINE;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_FORCE      )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = DEFINE;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_MASS       )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_VEL        )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_POS        )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_MAG        )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_DENS       )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_ELAS       )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_RAD        )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_WIDTH      )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+  ctable[dict_push(dict, KEYWORD_T, (char *) KEY_HEIGHT     )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
+
+  ctable[dict_push(dict, SYMBOL_T, (char *) SYM_AT     )][dict_push(dict, SYMBOL_T, (char *) SYM_NL )] = PARAM;
 }
 
 int **init_cono(dictionary_t *dict) {

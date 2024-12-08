@@ -37,9 +37,47 @@ Vec Object::getpos() {
   return pos;
 }
 
+void Object::setmass(float m) {
+  mass = m;
+}
+
+void Object::setradius(float r) {
+  radius = r;
+}
+
+void Object::setwidth(float r) {
+  width = r;
+}
+
+void Object::setheight(float r) {
+  height = r;
+}
+
+void Object::setpos(Vec p) {
+  pos = p;
+}
+
+void Object::setdens(float d) {
+  density = d;
+}
+
+void Object::setelas(float e) {
+  elasticity = e;
+}
+
+void Object::setvel(Vec v) {
+  velocity = v;
+}
+
+float Object::getmass() {
+  return mass;
+}
+
 float Object::getradius() {
   return radius;
 }
+
+
 
 Object::Object(Vec pos, float density, float mass, float restitution, float area, bool is_static, float radius, float width, float height, int type) {
   pos = pos;
@@ -125,4 +163,25 @@ Object::Object(Vec p, float w, float h, float m, float d, float e, float is_s) {
   type = BOX;
 }
 
-Object::Object() {};
+Object::Object() {
+  pos = {0, 0, 0};
+  velocity = {0, 0, 0};
+  fnet = {0, 0, 0};
+  angle = 0;
+  vrot = 0;
+
+  mass = 0.1;
+  density = 0.1;
+  elasticity = 0.1;
+  equalibrium = true;
+  is_static = false;
+
+  width = 1;
+  height = 1;
+  radius = 1;
+  area = 0;
+    
+  type = PARTICLE;
+
+
+};

@@ -22,7 +22,7 @@ int march_op(dictionary_t *dict, int *codes, int size, int current) {
 int handle_op(dictionary_t *dict, table_t *memtbl, int *codes, int **cono, int co, int no) {
   int op = cono[co][no];
   int li = local_index(dict, codes[co+1]); // identifier index
-  switch (op) {
+  /*switch (op) {
     case RETURN:
       return EXIT;
       break;
@@ -43,7 +43,7 @@ int handle_op(dictionary_t *dict, table_t *memtbl, int *codes, int **cono, int c
     case INPUT:
 
       break;
-  }
+  }*/
   return ERR;
 }
 

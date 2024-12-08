@@ -5,6 +5,8 @@
 #include "table.h"
 
 static const char *SYMBOLS[SYMBOL_COUNT] = {
+  SYM_NL,
+  SYM_AT
   /*
   SYM_NEWLINE,
   SYM_COMMA,  
@@ -36,6 +38,22 @@ static const char *SYMBOLS[SYMBOL_COUNT] = {
 };
 
 static const char *KEYWORDS[KEYWORD_COUNT] = {
+  KEY_INIT,
+  KEY_EVENT,
+  KEY_APPLY,
+  KEY_PTCL,
+  KEY_FORCE,
+  KEY_MASS,
+  KEY_VEL,
+  KEY_POS,
+  KEY_MAG,
+  KEY_DENS,
+  KEY_ELAS,
+  KEY_RAD,
+  KEY_WIDTH,
+  KEY_HEIGHT
+
+
   /*
   KEYWORD_NULL, 
   KEYWORD_VOID,

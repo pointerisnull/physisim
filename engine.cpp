@@ -38,20 +38,13 @@ void Engine::init(char *title, int w, int h) {
   window = win;
   world = wld;
   
-  Object p1({ (float)(50*cos((float)ticks*0.02)+256), (float)(256.0 - 50*sin((float)ticks*0.02)), 0}, 0.01, 1, false);
-  Object p2({ (float)(50*cos((float)ticks*0.09)+400), (float)(150.0 - 50*sin((float)ticks*0.2)), 0}, 0.01, 1, false);
-  Object c1({ 300, 200, 0}, 25, 0.03, 1, 0.5, false);
-  Object c2({ 500, 200, 0}, 5, 0.01, 1, 2.3, false);
-  Object c3({400,400, 0}, 50, 0.01, 1, 1.2, false);
-  Object s1({400,400, 0}, 5, 5, 0.01, 1, 1.0, false);
+  evc = 0;
+  interp.read_file((char *)"test.psim");
+  interp.run_code();
 
-  world.addobj(p1);
-  world.addobj(p2);
-  world.addobj(c1);
-  world.addobj(c2);
-  world.addobj(c3);
-  world.addobj(s1);
-
+  for (int i = 0; i < interp.objc; i++) {
+    world.addobj(interp.objs.at(i));
+  }
 }
 
 double Engine::timedelta() {
@@ -73,16 +66,19 @@ void Engine::tick() {
   
   world.handle_collisions();
   world.step(sdelta);
-
-  if (ticks == 10) {
-    world.getobj(0)->applyforce({1, 0, 0});
-    world.getobj(1)->applyforce({-0.3, 1.5, 0});
-  }
-  if (ticks == 100) {
-    world.getobj(0)->applyforce({-1.8, 3, 0});
-    world.getobj(1)->applyforce({2.3, 2.5, 0});
-    world.getobj(2)->applyforce({10, 1, 0});
-    world.getobj(3)->applyforce({-20, 2, 0});
+  
+  if ( evc < interp.eventc && interp.eventc > 0) {
+    for (int i = 0; i < interp.eventc; i++) {
+      event *ev = &interp.events.at(i);
+      if ( !ev->done && (uint64_t)(ev->time * tps) <= ticks) {
+        printf("applying force at %ld, %d\n", ticks, ev->time);
+        printf("index: %d, %d\n", ev->oi, ev->fi);
+        printf("f: %f \n", interp.vecs.at(ev->fi).x);
+        world.getobj(ev->oi)->applyforce(interp.vecs.at(ev->fi));
+        ev->done = true;
+        evc++;
+      }
+    }
   }
 }
 
@@ -104,6 +100,11 @@ void Engine::update_time() {
   last = current;
   current = unixtime();
   dtime += (current - last)/interval;
+}
+
+void Engine::shutdown() {
+  window.kill();
+  is_running = 0;
 }
 
 Engine::Engine(int rate) {

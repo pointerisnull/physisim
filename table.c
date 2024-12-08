@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include "config.h"
 #include "table.h"
+#include "pmath.h"
 
-int to_int(char *str);
+float to_float(char *str);
 
 table_t table_create(int size, int type) {
   table_t ret;
@@ -13,7 +14,9 @@ table_t table_create(int size, int type) {
   ret.tokc = 0;
   if (type == STRING_TYPE)
     ret.content_s = (char **) malloc(sizeof(char *) * size);
-  else 
+  else if (type == FLOAT_TYPE)
+    ret.content_f = (float *) malloc(sizeof(float *) * size);
+  else if (type == INT_TYPE)
     ret.content_i = (int *) malloc(sizeof(int *) * size);
   return ret;
 }
@@ -21,29 +24,33 @@ table_t table_create(int size, int type) {
 int table_insert(table_t *table, int index, void *content) {
   if (index > table->tokc)
     return -1;
-  int num = to_int((char*)content);
+  float num = to_float((char*)content);
   switch (table->type) {
     case INT_TYPE:
-      //int num = to_int((char*)content);
-      table->content_i[index] = num;
+      //int num = to_float((char*)content);
+      table->content_i[index] = (int)num;
       break;
     case STRING_TYPE:
       table->content_s[table->tokc] = (char *)content;
+      break;
+    case FLOAT_TYPE:
+      table->content_f[index] = num;
       break;
   }
   return 0;
 }
 
 void table_push(table_t *table, void *content) {
-  int num = to_int((char*)content);
+  float num = to_float((char*)content);
+  int numi = (int)(*(float *)content);
+
   switch (table->type) {
     case INT_TYPE:
-
       if (table->tokc >= table->size) {
         table->size *= 2;
         table->content_i = (int *) realloc(table->content_i, table->size * sizeof(int *));
       }
-      table->content_i[table->tokc] = num;
+      table->content_i[table->tokc] = (int)numi;
       table->tokc ++;
 
       break;
@@ -55,6 +62,15 @@ void table_push(table_t *table, void *content) {
       table->content_s[table->tokc] = (char *)content;
       table->tokc ++;
       //printf("table content: %s\n", (char *)table->content[table->tokc-1]);
+      break;
+    case FLOAT_TYPE:
+      if (table->tokc >= table->size) {
+        table->size *= 2;
+        table->content_f = (float *) realloc(table->content_f, table->size * sizeof(float *));
+      }
+      table->content_f[table->tokc] = num;
+      table->tokc ++;
+
       break;
   }
 }
@@ -68,13 +84,27 @@ void table_free(table_t *table) {
   if (table->type == STRING_TYPE) 
     free(table->content_s);
   else if (table->type == INT_TYPE)
+    free(table->content_f);
+  else if (table->type == FLOAT_TYPE)
     free(table->content_i);
+}
+
+int table_get_i(table_t table, int content) {
+  if (table.type == INT_TYPE) {
+    for (int i = 0; i < table.tokc; i++) {
+      if (table.content_i[i] == content)
+        return i;
+    }
+  }
+  return -1;
 }
 
 void table_print(table_t table) {
   for (int i = 0; i < table.tokc; i++) {
     if (table.type == STRING_TYPE)
       printf("index %d: %s\n", i, table.content_s[i]);
+    else if (table.type == FLOAT_TYPE)
+      printf("index %d: %f\n", i, table.content_f[i]);
     else if (table.type == INT_TYPE)
       printf("index %d: %d\n", i, table.content_i[i]);
   }
@@ -97,10 +127,10 @@ dictionary_t dict_create() {
   ret.literalmax = LITERAL_COUNT;
   ret.keyword_table = table_create(ret.keywordmax, STRING_TYPE);
   ret.symbol_table = table_create(ret.symbolmax, STRING_TYPE);
-  ret.constant_table = table_create(ret.constantmax, INT_TYPE);
+  ret.constant_table = table_create(ret.constantmax, FLOAT_TYPE);
   ret.literal_table = table_create(ret.literalmax, STRING_TYPE);
   ret.identifier_table = table_create(ret.identifiermax, STRING_TYPE);
-  ret.identifier_val_table = table_create(ret.identifiermax, INT_TYPE);
+  ret.identifier_val_table = table_create(ret.identifiermax, FLOAT_TYPE);
   ret.identifier_type_table = table_create(ret.identifiermax, INT_TYPE);
 
   return ret;
@@ -108,7 +138,6 @@ dictionary_t dict_create() {
 //returns the local index of item found. If not found, return -1
 int dict_search(dictionary_t dict, int type, void *content) {
 
-  //printf("DICT SEARCH: %s\nTYPE: %d\n", (char *)content, type);
   switch (type) {
     case KEYWORD_T:
       for (int i = 0; i < dict.keyword_table.tokc; i++)
@@ -121,9 +150,13 @@ int dict_search(dictionary_t dict, int type, void *content) {
           return i;
     break;
     case CONSTANT_T:
-      for (int i = 0; i < dict.constant_table.tokc; i++)
-        if (*(int*)content == dict.constant_table.content_i[i])
+      for (int i = 0; i < dict.constant_table.tokc; i++) {
+        float in = atof((char*)content);
+        int equal = fcomp(in, dict.constant_table.content_f[i]);
+        //if (*(float*)content == dict.constant_table.content_f[i])
+        if (equal)
           return i;
+      }
     break;
     case LITERAL_T:
       for (int i = 0; i < dict.literal_table.tokc; i++)
@@ -143,7 +176,7 @@ int dict_search(dictionary_t dict, int type, void *content) {
 }
 
 int dict_push(dictionary_t *dict, int type, void *content) {
-  int li = dict_search(*dict, type, content);
+  int li = dict_search(*dict, type, (void *)content);
   int code;
   //printf("DICTIONARY: (%s) type: %d\n", (char *)content, type);
   switch (type) {
@@ -164,6 +197,7 @@ int dict_push(dictionary_t *dict, int type, void *content) {
     case CONSTANT_T:
       if (li >= 0) 
         return li+dict->keywordmax+dict->symbolmax;
+      //printf("INCOMMING: %s\n", (char *)content);
       table_push(&dict->constant_table, content);
       code = dict->keywordmax+dict->symbolmax+dict->constantc;
       dict->constantc++;
@@ -190,6 +224,20 @@ int dict_push(dictionary_t *dict, int type, void *content) {
   return -1;
 }
 
+float dict_get_f(dictionary_t dict, int index) {
+  int li = local_index(&dict, index);
+  //if (dict.constant_table.content_f[li] != NULL)
+  return dict.constant_table.content_f[li];
+  //return 0.0;
+}
+
+char *dict_get_s(dictionary_t dict, int index) {
+  int li = local_index(&dict, index);
+  if (dict.literal_table.content_s[li] != NULL)
+    return dict.literal_table.content_s[li];
+  return NULL;
+}
+
 int local_index(dictionary_t *dict, int code) {
   if (code < dict->keywordmax)
     return code;
@@ -204,11 +252,11 @@ int local_index(dictionary_t *dict, int code) {
   else return -1;
 }
 
-int to_int(char *str) {
-  int test = atoi(str);
-  if (test != 0) 
+float to_float(char *str) {
+  float test = atof(str);
+  if (test != 0.0) 
     return test;
-  else if (!strncmp(str, "0", 2))
+  else if (!strncmp(str, "0.0", 2))
       return test;
-  return 0;
+  return 0.0;
 }

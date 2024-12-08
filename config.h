@@ -17,6 +17,27 @@
 #define LITERAL_T     4
 #define VALUE_T       5
 #define DTYPE_T       6
+
+static const char *KEY_INIT     = "INIT";
+static const char *KEY_EVENT    = "EVENTS";
+static const char *KEY_APPLY    = "APPLY";
+static const char *KEY_PTCL     = "PARTICLE";
+static const char *KEY_FORCE    = "FORCE";
+static const char *KEY_MASS     = "MASS";
+static const char *KEY_VEL      = "VELOCITY";
+static const char *KEY_POS      = "POS";
+static const char *KEY_MAG      = "MAG";
+static const char *KEY_DENS     = "DENSITY";
+static const char *KEY_ELAS     = "ELASTICITY";
+static const char *KEY_RAD      = "RADIUS";
+static const char *KEY_WIDTH    = "WIDTH";
+static const char *KEY_HEIGHT   = "HEIGHT";
+
+static const char *SYM_NL       = "\n";
+static const char *SYM_AT       = "@";          
+
+
+
 /*
 static const char *SYM_NEWLINE = "\n";
 

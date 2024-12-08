@@ -11,7 +11,7 @@
 int is_keyword(char *str);
 int is_symbol(char *str);
 int is_lit(char *str);
-int is_int(char *str);
+int is_num(char *str);
 int is_throwaway(char *str);
 int classify_token(char *lit);
 /*Given an array of strings (and the amount, "tokc"), */
@@ -59,7 +59,7 @@ int classify_token(char *lit) {
   else if (is_lit(lit))
     return LITERAL_T;
   //check if literal is integer number
-  else if (is_int(lit))
+  else if (is_num(lit))
     return CONSTANT_T;
   else if (is_keyword(lit))
     return KEYWORD_T;
@@ -70,11 +70,12 @@ int classify_token(char *lit) {
     return IDENTIFIER_T;
 }
 
-int is_int(char *str) {
-  int test = atoi(str);
-  if (test != 0) 
+int is_num(char *str) {
+  int testi = atoi(str);
+  double testf = atof(str);
+  if (testf != 0 || testf > 0.0 || testf < 0.0)
     return 1;
-  else if (!strncmp(str, "0", 2))
+  else if (!strncmp(str, "0", 2) || !strncmp(str, "0.0", 4))
       return 1;
   return 0;
 }
@@ -96,7 +97,7 @@ int is_symbol(char *str) {
 }
 
 int is_lit(char *str) {
-  if (str[0] == '\"')//SYM_STRLIT[0])
+  if (str[0] == '(')//SYM_STRLIT[0])
     return 1;
   return 0;
 }
