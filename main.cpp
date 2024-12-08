@@ -1,10 +1,19 @@
+/*******************************\
+*           PHYSîSîM            *
+* ============================= *
+* Physics simulator & scripting *
+*           language.           *
+*                               *
+*   -Brendan Haney, 2024        *
+\*******************************/
+#define VERSION 0.1.0
+
 #include "engine.h"
-#include "pscript.h"
 
 int main(int argc, char **argv) {
   
   Engine engine(60);
-  engine.init((char *)"Physisim", 720, 480);
+  engine.init((char *)"Physîsîm", 720, 480);
   engine.set_tick(0);
   
  
