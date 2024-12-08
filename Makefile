@@ -5,7 +5,7 @@ CXXFLAGS := -std=c++11 -Wall --static
 LIBS := -L/usr/local/lib /usr/local/lib/libSDL2.a -lm -lpthread -lrt
 INCLUDES := -I include
 
-SRCS := main.cpp engine.cpp display.cpp pmath.c object.cpp world.cpp collision.cpp lib/glad/src/glad.c lexer.c table.c token.c cono.c interp.c pscript.cpp
+SRCS := main.cpp engine.cpp display.cpp pmath.c object.cpp world.cpp collision.cpp lib/glad/src/glad.c lexer.c table.c token.c cono.c pscript.cpp
 OBJS := $(SRCS:.cpp=.o)
 EXEC := a.out
 
