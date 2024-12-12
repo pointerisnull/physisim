@@ -1,0 +1,16 @@
+PARTICLE a
+a MASS 0.3
+a POS (200, 200)
+
+PARTICLE b
+b MASS 0.3
+b POS (400, 200)
+
+PARTICLE c
+c MASS 0.54
+c POS (300, 200)
+
+FORCE f 
+f MAG (20, 0)
+
+APPLY f a @ 2

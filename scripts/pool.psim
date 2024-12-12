@@ -1,0 +1,40 @@
+PARTICLE white
+white MASS 0.1
+white RADIUS 15
+white ELASTICITY 0.4
+white POS (100, 250)
+
+PARTICLE one
+one POS (300, 250)
+
+PARTICLE two
+two POS (340, 270)
+
+PARTICLE three
+three POS (340, 230)
+
+PARTICLE four
+four POS (380, 290)
+
+PARTICLE five
+five POS (380, 250)
+
+PARTICLE six
+six POS (380, 210)
+
+PARTICLE seven
+seven POS (420, 270)
+
+PARTICLE eight
+eight POS (420, 230)
+
+PARTICLE nine
+nine POS (420, 190)
+
+PARTICLE ten
+ten POS (420, 310)
+
+FORCE f 
+f MAG (20, 0.3)
+
+APPLY f white @ 2
