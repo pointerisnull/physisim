@@ -23,7 +23,7 @@ class Engine {
     Interpreter interp;
 
   public:
-    void init(char *title, int w, int h);
+    void init(char *title, int w, int h, char *fp);
     void update_time();
     double timedelta();
     bool should_tick();

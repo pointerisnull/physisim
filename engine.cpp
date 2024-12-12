@@ -29,7 +29,7 @@ void Engine::check_events() {
   }
 }
 
-void Engine::init(char *title, int w, int h) {
+void Engine::init(char *title, int w, int h, char *fp) {
   is_running = 1;
   set_tick(0);
   Window win(title, w, h);
@@ -39,7 +39,7 @@ void Engine::init(char *title, int w, int h) {
   world = wld;
   
   evc = 0;
-  interp.read_file((char *)"test.psim");
+  interp.read_file(fp);
   interp.run_code();
 
   for (int i = 0; i < interp.objc; i++) {

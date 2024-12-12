@@ -13,7 +13,7 @@
 int main(int argc, char **argv) {
   
   Engine engine(60);
-  engine.init((char *)"Physîsîm", 720, 480);
+  engine.init((char *)"Physîsîm", 720, 480, argv[1]);
   engine.set_tick(0);
   
  
