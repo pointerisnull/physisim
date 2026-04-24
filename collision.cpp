@@ -1,4 +1,4 @@
-#include "collision.h"
+#include "collision.hpp"
 #include <stdio.h>
 
 bool Collision::circle_int(Object a, Object b) {

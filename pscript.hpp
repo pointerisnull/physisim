@@ -9,7 +9,7 @@
 
 #include "table.h"
 #include "pmath.h"
-#include "object.h"
+#include "object.hpp"
 
 typedef struct {
   int fi;

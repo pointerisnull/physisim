@@ -1,5 +1,5 @@
-#include "world.h"
-#include "collision.h"
+#include "world.hpp"
+#include "collision.hpp"
 #include <stdio.h>
 
 void World::step(float dtime) {

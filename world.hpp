@@ -2,7 +2,7 @@
 #define WORLD_H
 
 #include "pmath.h"
-#include "object.h"
+#include "object.hpp"
 #include <vector>
 #define SPACE   0
 #define FLAT    1 

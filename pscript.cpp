@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cstring>
 
-#include "pscript.h"
+#include "pscript.hpp"
 #include "config.h"
 #include "lexer.h"
 #include "token.h"
@@ -103,7 +103,7 @@ void Interpreter::execute(int co, int no, int last) {
     case DEFINE:
       index = codes[co]; 
       if (index == 3) { //particle
-        Object particle({100,100,0}, 15.0, 0.01, 0.1, 1.8, false);
+        Object particle({100,100,0}, 20.0, 0.01, 0.1, 1.8, false);
         objs.push_back(particle);
 
         table_push(&objtbl, &temp);

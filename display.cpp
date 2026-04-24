@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "display.h"
+#include "display.hpp"
 
 void Window::adjustCoords2D(float *x, float *y) {
   *x = (*x-cam.x)*cam.mapscale+width2;
@@ -100,7 +100,7 @@ void Window::draw(World w) {
         drawpixel(obj.pos.x, obj.pos.y, 0, 255, 255);
         break;
       case CIRCLE:
-        drawcircle(obj.pos.x, obj.pos.y, obj.radius, 255, 0, 0);
+        drawcircle(obj.pos.x, obj.pos.y, obj.radius, 0, 255, 255);
         break;
     case BOX:
         drawbox(obj.pos.x, obj.pos.y, obj.width, obj.height, 0, 255, 0);
