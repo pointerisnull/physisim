@@ -1,9 +1,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "config.h"
+#include "../common/config.h"
 #include "table.h"
-#include "pmath.h"
+#include "../physics/pmath.h"
 
 float to_float(char *str);
 

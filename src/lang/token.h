@@ -1,7 +1,7 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-#include "config.h"
+#include "../common/config.h"
 #include "table.h"
 
 static const char *SYMBOLS[SYMBOL_COUNT] = {

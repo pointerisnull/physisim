@@ -3,7 +3,7 @@
 #include <cstring>
 
 #include "pscript.hpp"
-#include "config.h"
+#include "../common/config.h"
 #include "lexer.h"
 #include "token.h"
 #include "table.h"

@@ -8,7 +8,7 @@
 \*******************************/
 #define VERSION 0.1.0
 
-#include "engine.hpp"
+#include "./core/engine.hpp"
 
 int main(int argc, char **argv) {
   

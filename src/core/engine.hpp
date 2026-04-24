@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "display.hpp"
 #include "world.hpp"
-#include "pscript.hpp"
+#include "../lang/pscript.hpp"
 
 class Engine {
   private:
