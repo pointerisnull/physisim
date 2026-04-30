@@ -1,6 +1,6 @@
 #include "engine.hpp"
-#include "object.hpp"
 #include "world.hpp"
+#include "../physics/object.hpp"
 
 #include <stdint.h>
 #include <sys/time.h>

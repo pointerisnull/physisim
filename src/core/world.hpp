@@ -4,6 +4,7 @@
 #include "../physics/pmath.h"
 #include "../physics/object.hpp"
 #include <vector>
+
 #define SPACE   0
 #define FLAT    1 
 #define PLANET  2

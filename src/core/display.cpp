@@ -1,11 +1,10 @@
-#include <SDL2/SDL.h>
+#include "display.hpp"
+
 #include <glad/glad.h>
 #include <math.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-#include "display.hpp"
 
 void Window::adjustCoords2D(float *x, float *y) {
   *x = (*x-cam.x)*cam.mapscale+width2;
