@@ -4,11 +4,12 @@
 * Physics simulator & scripting *
 *           language.           *
 *                               *
-*   -Brendan Haney, 2024        *
+*   -Brendan Haney 2024, 2026   *
 \*******************************/
+
 #define VERSION 0.1.0
 
-#include "engine.h"
+#include "./core/engine.hpp"
 
 int main(int argc, char **argv) {
   

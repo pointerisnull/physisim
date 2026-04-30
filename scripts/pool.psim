@@ -1,6 +1,6 @@
 PARTICLE white
 white MASS 0.1
-white RADIUS 15
+white RADIUS 20
 white ELASTICITY 0.4
 white POS (100, 250)
 
@@ -35,6 +35,6 @@ PARTICLE ten
 ten POS (420, 310)
 
 FORCE f 
-f MAG (20, 0.3)
+f MAG (100, 0.8)
 
-APPLY f white @ 2
+APPLY f white @ 3

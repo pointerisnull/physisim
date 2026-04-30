@@ -2,7 +2,7 @@
 #define COLLS_CLASS
 
 #include "pmath.h"
-#include "object.h"
+#include "object.hpp"
 
 class Collision {
   private:

@@ -2,9 +2,9 @@
 #define ENGINE_CLASS_H
 
 #include <stdint.h>
-#include "display.h"
-#include "world.h"
-#include "pscript.h"
+#include "display.hpp"
+#include "world.hpp"
+#include "../lang/pscript.hpp"
 
 class Engine {
   private:

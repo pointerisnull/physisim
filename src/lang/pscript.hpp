@@ -8,8 +8,8 @@
 #include <string>
 
 #include "table.h"
-#include "pmath.h"
-#include "object.h"
+#include "../physics/pmath.h"
+#include "../physics/object.hpp"
 
 typedef struct {
   int fi;

@@ -1,0 +1,6 @@
+a.out
+src/*.o 
+src/common/*.o
+src/core/*.o
+src/lang/*.o
+src/physics/*.o

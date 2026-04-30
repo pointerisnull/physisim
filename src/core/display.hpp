@@ -2,7 +2,8 @@
 #define DISPLAY_H
 
 #include <SDL2/SDL.h>
-#include "world.h"
+
+#include "world.hpp"
 
 typedef struct {
 	float x,y,z;

@@ -1,4 +1,4 @@
-#include "config.h"
+#include "../common/config.h"
 #include "token.h"
 #include "lexer.h"
 #include "table.h"

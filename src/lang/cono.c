@@ -3,7 +3,7 @@
 #include "cono.h"
 #include "token.h"
 #include "table.h"
-#include "config.h"
+#include "../common/config.h"
 
 /*KEYWORDS -> THEN SYMBOLS*/
 char *getop_str(int **ctable, int co, int no) {

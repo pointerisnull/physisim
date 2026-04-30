@@ -13,4 +13,4 @@ c POS (300, 200)
 FORCE f 
 f MAG (20, 0)
 
-APPLY f a @ 2
+APPLY f a @ 5
