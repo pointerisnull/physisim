@@ -2,7 +2,7 @@ CXX := g++
 CXXFLAGS := -std=c++11 -Wall --static
 
 LIBS := -L/usr/local/lib /usr/local/lib/libSDL2.a -lm -lpthread -lrt
-INCLUDES := -I include
+INCLUDES := -I lib/include
 
 SRCS := $(wildcard src/core/*.cpp src/physics/*.cpp src/physics/*.c src/lang/*.cpp src/lang/*.c lib/glad/src/glad.c) src/main.cpp 
 OBJS := $(SRCS:.cpp=.o)
