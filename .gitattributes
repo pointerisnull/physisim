@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+lib/** linguist-vendored
+>>>>>>> 70f5a07 (gitattributes)
 *.h linguist-language=C
 *.c linguist-language=C
 *.hpp linguist-language=C++
